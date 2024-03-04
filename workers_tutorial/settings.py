@@ -148,3 +148,5 @@ LOGGING = {
         'handlers': ['console'],
     },
 }
+
+TG_BOT_TOKEN = env.str("TG_BOT_TOKEN")
