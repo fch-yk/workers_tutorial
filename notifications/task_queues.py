@@ -15,8 +15,11 @@ class NotificationQueue(AbstractTaskQueue):
         self,
         queryset: models.QuerySet,
     ) -> models.QuerySet:
-        queryset.exclude(failed=True)
-        return queryset
+        tasks_pks = [task.pk for task in queryset]
+        return OrderNotification.objects.filter(
+            pk__in=tasks_pks,
+            failed=False,
+        )
 
     def handle_task(self, queryset_item: OrderNotification):
         tg_bot_token = settings.TG_BOT_TOKEN
