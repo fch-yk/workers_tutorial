@@ -5,7 +5,10 @@ class OrderNotification(models.Model):
     order_number = models.CharField("Номер заказа", max_length=8)
     tg_user_id = models.BigIntegerField("ID пользователя в Telegram")
     processed = models.BooleanField("Обработано")
-    failed = models.BooleanField("Завершено с ошибкой")
+    failed_attempts_number = models.PositiveSmallIntegerField(
+        verbose_name="Число неудачных попыток",
+        default=0,
+    )
 
     class Meta:
         verbose_name = "Уведомление о заказе"
