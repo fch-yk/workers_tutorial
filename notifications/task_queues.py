@@ -15,7 +15,7 @@ class NotificationQueue(AbstractTaskQueue):
         self,
         queryset: models.QuerySet,
     ) -> models.QuerySet:
-        return queryset.exclude(failed_attempts_number__gt=3)
+        return queryset.exclude(failed_attempts_number__gte=3)
 
     def handle_task(self, queryset_item: OrderNotification):
         tg_bot_token = settings.TG_BOT_TOKEN
